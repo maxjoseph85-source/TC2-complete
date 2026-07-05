@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tc2-hello-world
+  labels:
+    app: tc2-hello-world
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tc2-hello-world
+  template:
+    metadata:
+      labels:
+        app: tc2-hello-world
+    spec:
+      containers:
+        - name: tc2-hello-world
+          image: 792126555869.dkr.ecr.us-east-1.amazonaws.com/tc2-hello-world:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
