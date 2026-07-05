@@ -10,22 +10,6 @@ pipeline {
         stage('Checkout') {
             steps { checkout scm }
         }
-        stage('Terraform Plan') {
-            steps {
-                dir('terraform') {
-                    sh 'terraform init -input=false'
-                    sh 'terraform plan -out=tfplan'
-                }
-            }
-        }
-        stage('Terraform Apply') {
-            when { branch 'main' }
-            steps {
-                dir('terraform') {
-                    sh 'terraform apply -input=false tfplan'
-                }
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 dir('app') {
